@@ -1,0 +1,17 @@
+aiohttp==3.6.2
+uvloop==0.14.0
+ujson==3.2.0
+marshmallow==3.8.0
+click==7.1.2
+envparse==0.2.0
+
+# mongo db
+motor==2.3.0
+
+# postgresql
+asyncpg==0.21.0
+psycopg2-binary==2.8.6
+
+# mysql
+aiomysql==0.0.20
+dsnparse==0.1.15
