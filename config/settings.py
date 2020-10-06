@@ -37,7 +37,9 @@ DATABASES = {
         "db": "mysql",
         "max_pool_size": env.int("MONGO_MAX_POOL_SIZE", default=1),
         "min_pool_size": env.int("MONGO_MIN_POOL_SIZE", default=1),
-    }
+    },
 }
 
 # ---------------- DB settings ------------------ #
+
+LOG_LEVEL = env.str("LOG_LEVEL", default="INFO")
