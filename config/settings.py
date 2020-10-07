@@ -22,21 +22,21 @@ DATABASES = {
     "default": {
         "dsn": MONGO_DSN,
         "db": "mongodb",
-        "max_pool_size": env.int("MONGO_MAX_POOL_SIZE", default=1),
-        "min_pool_size": env.int("MONGO_MIN_POOL_SIZE", default=1),
+        "max_pool_size": env.int("MAX_POOL_SIZE", default=1),
+        "min_pool_size": env.int("MIN_POOL_SIZE", default=1),
         "db_name": DB_NAME,
     },
     "postgres": {
         "dsn": POSTGRESQL_DSN,
         "db": "postgresql",
-        "max_pool_size": env.int("MONGO_MAX_POOL_SIZE", default=1),
-        "min_pool_size": env.int("MONGO_MIN_POOL_SIZE", default=1),
+        "max_pool_size": env.int("MAX_POOL_SIZE", default=1),
+        "min_pool_size": env.int("MIN_POOL_SIZE", default=1),
     },
     "mysql": {
         "dsn": MYSQL_DSN,
         "db": "mysql",
-        "max_pool_size": env.int("MONGO_MAX_POOL_SIZE", default=1),
-        "min_pool_size": env.int("MONGO_MIN_POOL_SIZE", default=1),
+        "max_pool_size": env.int("MAX_POOL_SIZE", default=1),
+        "min_pool_size": env.int("MIN_POOL_SIZE", default=1),
     },
 }
 

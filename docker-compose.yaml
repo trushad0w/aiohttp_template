@@ -1,0 +1,69 @@
+version: '3.9'
+
+x-common-variables: &common-variables
+  - DB_USER=mongo
+  - DB_PASSWORD=pass
+  - DB_HOST=mongo
+  - DB_PORT=27017
+  - DB_NAME=test
+  - DEBUG=False
+  - POSTGRESQL_DSN=postgres://postgres:postgres@postgres:5432/postgres
+  - MYSQL_DSN=mysql://root:mysql@mysql:3306/mysql
+  - LOG_LEVEL=DEBUG
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    image: aiotemplate/baseimage:version
+    command: >
+      /bin/sh -c "python manage.py migrate
+      && gunicorn manage:init_app --workers 4 --bind 0.0.0.0:8000 --worker-class aiohttp.GunicornUVLoopWebWorker"
+    depends_on:
+      - postgres
+      - mongodb
+      - mysql
+    environment:
+      *common-variables
+    expose:
+      - "8000"
+    ports:
+      - 8000:8000
+
+  postgres:
+    image: postgres:11-alpine
+    restart: always
+    hostname: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postres:/var/lib/postgresql/data/pgdata
+
+  mysql:
+    image: mysql:5.6
+    restart: always
+    hostname: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    volumes:
+      -  mysql:/var/lib/mysql
+
+  mongodb:
+    image: clutteredcode/mongo-alpine
+    restart: always
+    hostname: mongo
+    environment:
+      - MONGO_USERNAME=mongo
+      - MONGO_PASSWORD=pass
+      - MONGO_INITDB_DATABASE=test
+    volumes:
+      - mongo:/data/db
+
+
+volumes:
+  postres:
+  mysql:
+  mongo:
