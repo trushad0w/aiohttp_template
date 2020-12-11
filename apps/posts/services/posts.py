@@ -1,10 +1,10 @@
 import asyncio
 from typing import Tuple, List
 
-from src.models.features import FeatureDto
-from src.models.posts import PostsDto
-from src.repositories.features import FeaturesRepo
-from src.repositories.posts import PostsRepo
+from apps.posts.models.features import FeatureDto
+from apps.posts.models.posts import PostsDto
+from apps.posts.repositories.features import FeaturesRepo
+from apps.posts.repositories.posts import PostsRepo
 
 
 class PostsService:

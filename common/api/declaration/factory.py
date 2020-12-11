@@ -18,7 +18,6 @@ from common.api.response.schemas import ErrorSchema
 
 
 def _assert_type(name: str, value: typing.Any, types: typing.Tuple[typing.Type, ...]):
-    """"""
 
     if not value or isinstance(value, types):
         return

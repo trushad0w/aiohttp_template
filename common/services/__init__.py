@@ -1,0 +1,24 @@
+from typing import Type
+
+from common.exceptions import ServiceInitError
+from common.logger import app_logger
+from common.services.client import ServiceClient
+
+CLIENT_SERVICES = {}
+
+
+def register_service_client(class_name: Type[ServiceClient], initialized_class: ServiceClient):
+    """
+    Method to register external service client
+    Example usage:
+    register_service_client(ServiceClient, ServiceClient(base_url, ...))
+    """
+    CLIENT_SERVICES[class_name] = initialized_class
+
+
+def get_client(class_name: Type[ServiceClient]):
+    client_service = CLIENT_SERVICES.get(class_name)
+    if not client_service:
+        app_logger.critical(f"Service {class_name} has not been initialized")
+        raise ServiceInitError(f"Service {class_name} has not been initialized")
+    return client_service

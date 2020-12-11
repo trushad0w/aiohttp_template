@@ -24,7 +24,6 @@ class ResponseDefinition:
         self.description = description
 
     def dump(self, result) -> dict:
-        """"""
 
         if result is not None:
             result = self.schema.dump(result) if self.schema else None
@@ -55,7 +54,6 @@ class RequestQueryDefinition:
         self.schema = schema
 
     def load(self, data: typing.Union[dict, str]) -> dict:
-        """"""
 
         if isinstance(data, str):
             data = ujson.loads(data) if data else dict()
@@ -90,7 +88,6 @@ class RequestBodyDefinition(RequestQueryDefinition):
         description: typing.Optional[str] = None,
         examples: typing.Dict[str, dict] = None,
     ):
-        """"""
         super().__init__(schema)
         self.required = required
         self.description = description

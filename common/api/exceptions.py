@@ -35,7 +35,6 @@ class APIDomainException(APICoreException):
 
 
 def resolve_status_code(e: Exception) -> typing.Optional[int]:
-    """"""
 
     if hasattr(e, "status"):
         return e.status
@@ -44,7 +43,6 @@ def resolve_status_code(e: Exception) -> typing.Optional[int]:
 
 
 def resolve_error_code(e: Exception):
-    """"""
 
     if hasattr(e, "code") and e.code:
         return e.code

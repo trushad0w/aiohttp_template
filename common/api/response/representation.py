@@ -27,7 +27,6 @@ def make_representation_error(
     code: typing.Optional[str] = None,
     meta: typing.Optional[dict] = None,
 ) -> dict:
-    """"""
 
     payload = {
         "success": False,
@@ -50,7 +49,6 @@ def make_representation_error(
 
 
 def make_representation_error_from_exception(e: Exception) -> dict:
-    """"""
 
     if isinstance(e, APIDomainException):
         return make_representation_error(code=e.code, message=e.message, errors=e.errors, meta=e.meta)
@@ -79,7 +77,6 @@ def make_error(
     field_name: str = None,
     meta: typing.Optional[dict] = None,
 ) -> dict:
-    """"""
 
     error = {"code": code, "message": message}
 
@@ -100,7 +97,6 @@ def make_error_from_exception(e: Exception) -> dict:
 
 
 def make_validation_errors(errors: typing.Union[list, dict], field_name: str = None):
-    """"""
 
     results = []
 

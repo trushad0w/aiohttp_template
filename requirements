@@ -4,9 +4,11 @@ ujson==3.2.0
 marshmallow==3.8.0
 click==7.1.2
 envparse==0.2.0
+python-consul==1.1.0
 
 # mongo db
 motor==2.3.0
+pymongo-migrate==0.11.0
 
 # postgresql
 asyncpg==0.21.0
@@ -23,4 +25,5 @@ yoyo_migrations==7.2.0
 # swagger generation
 apispec==4.0.0
 
+# Optional for services without k8s
 gunicorn==20.0.4
