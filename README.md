@@ -6,7 +6,7 @@ Python clean architecture approach for aiohttp
 I'll start with common features that are designed to make development process easier.
 
 ## 1. api module
-**api** - this module contains basic middleware to handle errors all over the project,
+This module contains basic middleware to handle errors all over the project,
 also this module provides handy decorator for your views `definition`. 
 
 ### _definition decorator_
@@ -69,7 +69,7 @@ Just a route to handle health checks.
 
 ## 6. logger
 
-Just logger for the project. You just need to setup it on app init by passing log_level into
+Logger for the project. You need to setup it on app init by passing log_level into
 `init_logger()` method. Then all that you need is just import app_logger from this 
 module to log necessary information.
 
