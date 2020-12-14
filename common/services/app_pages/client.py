@@ -32,12 +32,12 @@ class AppPagesClient(ServiceClient):
         data = await self._make_request(request=self.session.get, url=url, params=triplet.asdict())
         return AppDataSchema().load(data)
 
-    async def get_dev_context(self, triplet: AppTripletDto) -> List[DevContextAppDto]:
+    async def get_dev_context(self, triplet: AppTripletDto) -> Dict[str, DevContextAppDto]:
         url = self.make_full_url(self.DEV_CONTEXT_URL)
 
         data = await self._make_request(request=self.session.get, url=url, params=triplet.asdict())
         data = data.get("apps")
-        return [DevContextAppDto.make(app) for ext_id, app in data.items()]
+        return {ext_id: DevContextAppDto.make(app) for ext_id, app in data.items()}
 
     async def get_featured_posts(self, store: AppPagesStoreEnum, country: str) -> List[BlogPostDto]:
         params = {"store": store, "country": country}
@@ -71,7 +71,7 @@ class AppPagesClient(ServiceClient):
         }
         url = self.make_full_url(self.DEV_APPS_URL)
         data = await self._make_request(request=self.session.get, url=url, params=params)
-        return DevAppsSchema(many=True).load(data.get("devapps")) if data else []
+        return DevAppsSchema(many=True).load(data.get("developer_apps")) if data else []
 
     async def _make_request(self, request: Callable, retries=MAX_RETRIES, **kwargs) -> dict:
         try:

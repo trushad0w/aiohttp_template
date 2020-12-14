@@ -12,7 +12,7 @@ from config.routes import init_routing_table
 TEST_DB_PREFIX = "testdb"
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(autouse=True)
 def drop_test_db():
     test_db_name = f"{settings.DB_NAME}_{TEST_DB_PREFIX}"
     from config.settings import MONGO_DSN
@@ -50,5 +50,5 @@ def __init_test_app():
 
 
 @pytest.fixture(autouse=True)
-def client(loop, test_client):
-    return loop.run_until_complete(test_client(__init_test_app()))
+def client(loop, aiohttp_client):
+    return loop.run_until_complete(aiohttp_client(__init_test_app()))
