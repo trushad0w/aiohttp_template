@@ -113,7 +113,7 @@ class ServiceClient(ABC):
                 resp.raise_for_status()
                 return resp
         except ClientResponseError as e:
-            app_logger.warning(f"Error during get_app_meta request: {e.args}")
+            app_logger.warning(f"Error during external request: {e.args}")
             if retries > 0 and e.status >= 500:
                 return await self._make_request(request=request, retries=retries - 1, **kwargs)
             else:
