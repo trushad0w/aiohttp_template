@@ -6,6 +6,7 @@ from aiohttp import web
 
 from common.api import ErrorHandlerMiddleware, setup_swagger
 from common.db.mongo_db import MongoDbRegister, shutdown_mongo_db_pool
+from common.monitoring import setup_metrics
 from config import settings
 from common.logger import init_logger
 from config.external import init_clients
@@ -22,6 +23,7 @@ async def init_app():
     init_routing_table(app)
     setup_swagger(app)
     init_clients()
+    setup_metrics(app, app_name="provide-app-name-here")
 
     MongoDbRegister.setup_db(settings=settings.MONGO_DATABASES)
 

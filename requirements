@@ -27,3 +27,7 @@ apispec==4.0.0
 
 # Optional for services without k8s
 gunicorn==20.0.4
+
+
+#metrics
+prometheus_client==0.9.0
