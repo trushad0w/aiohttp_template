@@ -63,7 +63,7 @@ class ClientSession(aiohttp.ClientSession):
 
 
 class ServiceClient(ABC):
-    DEFAULT_MAX_RETRIES = 3
+    DEFAULT_MAX_RETRIES = 0
 
     def __init__(
         self,
@@ -111,9 +111,10 @@ class ServiceClient(ABC):
         try:
             async with request(**kwargs) as resp:
                 resp.raise_for_status()
-                data = await resp.json()
-                return data
+                return resp
         except ClientResponseError as e:
-            app_logger.warning(f"Error during get_app_meta request: {e.args}")
-            if retries > 0:
+            app_logger.warning(f"Error during external request: {e.args}")
+            if retries > 0 and e.status >= 500:
                 return await self._make_request(request=request, retries=retries - 1, **kwargs)
+            else:
+                raise e
