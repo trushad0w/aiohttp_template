@@ -20,13 +20,16 @@ class PostsService:
         cls, post_id: int, fetch_non_active: bool
     ) -> Tuple[PostsDto, List[FeatureDto]]:
         posts, features = await asyncio.gather(
-            PostsRepo.get_post_by_id(id=post_id), FeaturesRepo.get_features(fetch_non_active=fetch_non_active)
+            PostsRepo.get_post_by_id(id=post_id),
+            FeaturesRepo.get_features(fetch_non_active=fetch_non_active),
         )
         # Here might be some app business logic
         return posts, features
 
     @classmethod
     async def external_service_example(cls):
-        app_pages_client: AppPagesClient = services.get_client(AppPagesClient)
-        data = await app_pages_client.get_featured_posts(store=AppPagesStoreEnum.GOOGLE_PLAY, country="us")
+        app_pages_client = services.get_client(AppPagesClient)
+        data = await app_pages_client.get_featured_posts(
+            store=AppPagesStoreEnum.GOOGLE_PLAY, country="us"
+        )
         return data
